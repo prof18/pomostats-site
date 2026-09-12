@@ -1,0 +1,796 @@
+/* ==========================================================================
+   PomoStats — landing page
+   Design direction "1c Harvest", ported from the app's own token set
+   (docs/design/PomoStats.dc.html → themes(dark)). Do not invent colours here:
+   every value below exists in the app or is derived from it.
+   ========================================================================== */
+
+/* ---------- tokens: light (default) ---------- */
+:root {
+  --field:        #EFEBDF;   /* app bg  */
+  --field-deep:   #e7e2d4;   /* app stage */
+  --paper:        #FBF9F2;   /* cardBg  */
+  --ink:          #1C2620;   /* text    */
+  --ink-body:     #2b352d;   /* body    */
+  --ink-sub:      #616659;   /* the app's sub hue at 70%: AA on field, deep and paper */
+  --accent:       #D8483C;
+  --accent-ink:   #b93a30;   /* accent, darkened for text-on-field contrast */
+  --leaf:         #35734A;   /* up / brand fruit */
+  --leaf-deep:    #2a5d3b;
+  --star:         #E0A100;
+
+  --panel:        #1C2620;   /* statBg — the dark green-black slab */
+  --panel-ink:    #F3F0E6;   /* statText */
+  --panel-sub:    #8ba491;   /* statSub  */
+  --panel-line:   #33403790;
+
+  --hairline:     #ded7c5;
+  --pill-line:    #cfc9b8;
+  --card-line:    transparent;
+  --card-shadow:  0 2px 6px -2px rgba(28, 38, 32, .12);
+  --card-shadow-lg: 0 24px 60px -28px rgba(28, 38, 32, .38);
+  --frame:        #d3cebe;   /* frameBorder */
+  --frame-glint:  #fffdf6;
+
+  --grain:        .035;
+  --scheme:       light;
+}
+
+/* ---------- tokens: dark ----------
+   Driven solely by the device setting. There is no in-page theme switch, so this
+   media query is the only place dark is defined. ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --field:      #0F140F;
+    --field-deep: #080a08;
+    --paper:      #18211A;
+    --ink:        #F1EEE4;
+    --ink-body:   #d5d2c7;
+    --ink-sub:    #93a094;   /* lifted from #7d887e for AA on --field */
+    --accent:     #E4544A;
+    --accent-ink: #f0736a;
+    --leaf:       #7CC98B;
+    --leaf-deep:  #6FBE82;
+    --star:       #F0B429;
+
+    --panel:      #18211A;
+    --panel-ink:  #F1EEE4;
+    --panel-sub:  #93a094;
+    --panel-line: #2a3430;
+
+    --hairline:   #232e25;
+    --pill-line:  #2a3430;
+    --card-line:  #212c23;
+    --card-shadow: none;
+    --card-shadow-lg: 0 24px 60px -30px rgba(0, 0, 0, .8);
+    --frame:      #232e25;
+    --frame-glint:#2b3a2d;
+
+    --grain:      .05;
+    --scheme:     dark;
+  }
+}
+
+/* ---------- type + rhythm ---------- */
+:root {
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --body:    "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gut:     clamp(1.25rem, 4vw, 2.5rem);
+  --measure: 62ch;
+  --shell:   1180px;
+
+  color-scheme: var(--scheme);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--field);
+  color: var(--ink-body);
+  font-family: var(--body);
+  font-size: clamp(1rem, .96rem + .2vw, 1.075rem);
+  line-height: 1.6;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* the tactile part of "Harvest": a fibre grain over the whole field, so the
+   cream reads as paper rather than as flat #EFEBDF */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body > * { position: relative; z-index: 1; }
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.08;
+  letter-spacing: -.015em;
+  margin: 0;
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 0;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.05rem, 1.35rem + 3.6vw, 4.05rem); letter-spacing: -.028em; }
+h2 { font-size: clamp(1.9rem, 1.4rem + 2.2vw, 2.9rem); letter-spacing: -.022em; }
+h3 { font-size: clamp(1.2rem, 1.08rem + .5vw, 1.45rem); letter-spacing: -.012em; }
+
+p { margin: 0; max-width: var(--measure); text-wrap: pretty; }
+
+a { color: inherit; }
+
+strong { font-weight: 600; color: var(--ink); }
+
+img, svg { display: block; max-width: 100%; }
+
+/* the mono micro-label, lifted wholesale from the app's section headers */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-sub);
+  margin: 0;
+}
+.eyebrow--panel { color: var(--panel-sub); }
+
+.num { font-variant-numeric: tabular-nums; }
+
+.shell {
+  width: min(100% - (var(--gut) * 2), var(--shell));
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.skip:focus {
+  left: var(--gut);
+  top: .75rem;
+  z-index: 99;
+  padding: .6rem 1rem;
+  background: var(--panel);
+  color: var(--panel-ink);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   header
+   ========================================================================== */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: .85rem 0;
+  background: color-mix(in srgb, var(--field) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s ease;
+}
+.masthead[data-stuck="true"] { border-bottom-color: var(--hairline); }
+
+.masthead__row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  text-decoration: none;
+  margin-right: auto;
+}
+/* The glyph's own proportions put the apple body in the lower ~72% of the box
+   and give the thin stem the top quarter, so it reads smaller than its measured
+   height. Sized against the wordmark's cap height rather than its font-size,
+   and nudged down so the body sits on the baseline optically. */
+.wordmark svg {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  margin-bottom: -2px;
+}
+.wordmark b {
+  font-family: var(--display);
+  font-size: 1.42rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.02em;
+}
+
+.masthead nav {
+  display: flex;
+  gap: 1.6rem;
+}
+.masthead nav a {
+  font-size: .925rem;
+  font-weight: 500;
+  color: var(--ink-sub);
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.masthead nav a:hover { color: var(--ink); }
+
+@media (max-width: 860px) {
+  .masthead nav { display: none; }
+}
+
+/* ==========================================================================
+   buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .95rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--body);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .18s cubic-bezier(.2, .8, .3, 1), box-shadow .18s ease,
+              background-color .18s ease, border-color .18s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.btn--play {
+  background: var(--leaf-deep);
+  color: #fff;
+  box-shadow: 0 10px 26px -12px color-mix(in srgb, var(--leaf-deep) 70%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  .btn--play { color: #0F140F; }
+}
+.btn--play:hover { box-shadow: 0 16px 34px -12px color-mix(in srgb, var(--leaf-deep) 70%, transparent); }
+.btn--play svg { width: 19px; height: 19px; flex: none; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--pill-line);
+}
+.btn--ghost:hover { border-color: var(--ink-sub); }
+
+.btn--onpanel {
+  background: var(--panel-ink);
+  color: var(--panel);
+  box-shadow: 0 12px 30px -14px rgba(0, 0, 0, .5);
+}
+
+/* ==========================================================================
+   hero
+   ========================================================================== */
+.hero {
+  padding: clamp(3rem, 6vw, 6rem) 0 clamp(3.5rem, 7vw, 7rem);
+  position: relative;
+  isolation: isolate;
+}
+/* warm bloom behind the hero so the field has depth instead of being flat cream */
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  /* Kept inside the hero's own box: a negative horizontal inset here bleeds
+     past the viewport and shows up as a phantom 10% of horizontal overflow,
+     which only body{overflow-x:hidden} was hiding. */
+  inset: -20% 0 auto 0;
+  height: 130%;
+  background:
+    radial-gradient(48% 40% at 78% 22%, color-mix(in srgb, var(--leaf) 16%, transparent), transparent 68%),
+    radial-gradient(40% 34% at 12% 8%,  color-mix(in srgb, var(--accent) 11%, transparent), transparent 66%);
+  pointer-events: none;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.hero__grid > * { min-width: 0; }
+@media (max-width: 940px) {
+  .hero__grid { grid-template-columns: 1fr; }
+}
+
+.hero h1 { margin: 1.1rem 0 0; }
+
+/* the single accent in the system: a red rule under the word that matters.
+   Same device as the Play screenshots — one accent, used once. */
+.mark {
+  position: relative;
+  white-space: nowrap;
+}
+.mark::after {
+  content: "";
+  position: absolute;
+  left: -.02em;
+  right: -.02em;
+  bottom: .02em;
+  height: .11em;
+  border-radius: 999px;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(var(--mark-scale, 1));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mark::after {
+    --mark-scale: 0;
+    animation: mark-in .7s cubic-bezier(.2, .8, .3, 1) .45s forwards;
+  }
+}
+@keyframes mark-in { to { --mark-scale: 1; transform: scaleX(1); } }
+
+.hero__lede {
+  margin-top: 1.5rem;
+  font-size: clamp(1.075rem, 1rem + .35vw, 1.25rem);
+  color: var(--ink-body);
+  max-width: 46ch;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .85rem;
+  margin-top: 2.1rem;
+}
+
+.hero__fineprint {
+  margin-top: 1.15rem;
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .04em;
+  color: var(--ink-sub);
+}
+
+/* ---------- hero stat slab: the app's own dark stat panel, reused ---------- */
+.slab {
+  margin-top: clamp(2.25rem, 4vw, 3rem);
+  background: var(--panel);
+  border: 1px solid var(--card-line);
+  border-radius: 22px;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  gap: .25rem;
+  box-shadow: var(--card-shadow-lg);
+}
+.slab > div { flex: 1; min-width: 0; }
+.slab > div + div {
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--panel-line);
+}
+.slab dt {
+  font-family: var(--mono);
+  font-size: .5625rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--panel-sub);
+}
+.slab dd {
+  margin: .45rem 0 0;
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 1rem + .6vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--panel-ink);
+  font-variation-settings: "opsz" 40;
+}
+.slab dd small {
+  display: block;
+  margin-top: .3rem;
+  font-family: var(--body);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--panel-sub);
+  line-height: 1.35;
+}
+/* The slab's three columns only fit while the slab itself is wide. Between about
+   960px and 1000px of viewport the hero is still two-column but the text column
+   has squeezed the slab to ~450px, which is too narrow for three — so stack on
+   the slab's OWN width, not the viewport's. The media query below stays as the
+   floor for browsers without container queries. */
+.hero__copy { container-type: inline-size; }
+
+@container (max-width: 540px) {
+  .slab { flex-direction: column; gap: 1.1rem; }
+  .slab > div + div { padding-left: 0; border-left: 0; padding-top: 1.1rem; border-top: 1px solid var(--panel-line); }
+}
+
+@media (max-width: 560px) {
+  .slab { flex-direction: column; gap: 1.1rem; }
+  .slab > div + div { padding-left: 0; border-left: 0; padding-top: 1.1rem; border-top: 1px solid var(--panel-line); }
+}
+
+/* ==========================================================================
+   device frame — the app's own phone frame: 10px bezel, 44px radius
+   ========================================================================== */
+.device {
+  position: relative;
+  width: 100%;
+  max-width: var(--device-w, 320px);
+  margin-inline: auto;
+  background: var(--frame);
+  border-radius: 42px;
+  padding: 9px;
+  box-shadow:
+    var(--card-shadow-lg),
+    inset 0 1px 0 var(--frame-glint),
+    0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.device img {
+  width: 100%;
+  height: auto;
+  border-radius: 34px;
+  background: var(--field);
+  display: block;
+}
+
+.device--hero {
+  --device-w: 348px;
+  rotate: 1.1deg;
+}
+@media (max-width: 640px) {
+  .device--hero { --device-w: 300px; rotate: 0deg; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .device--hero { animation: rise 1s cubic-bezier(.16, 1, .3, 1) both; }
+}
+@keyframes rise {
+  from { opacity: 0; translate: 0 34px; rotate: 3deg; }
+  to   { opacity: 1; translate: 0 0;    rotate: 1.1deg; }
+}
+
+/* ==========================================================================
+   section scaffolding
+   ========================================================================== */
+.band { padding: clamp(4rem, 8vw, 7.5rem) 0; }
+
+.band--panel {
+  background: var(--panel);
+  color: var(--panel-sub);
+}
+.band--panel h2, .band--panel h3 { color: var(--panel-ink); }
+.band--panel p { color: color-mix(in srgb, var(--panel-ink) 78%, transparent); }
+/* strong inherits --ink, which is the DARK ink — invisible on the panel */
+.band--panel strong, .tier--flag strong { color: var(--panel-ink); }
+.band--panel a { color: var(--panel-ink); }
+
+.band--deep { background: var(--field-deep); }
+
+.band__head { max-width: 52ch; }
+.band__head h2 { margin-top: .9rem; }
+.band__head p { margin-top: 1.15rem; font-size: 1.075rem; }
+
+/* ---------- feature rows: alternating, asymmetric, not a card grid ---------- */
+.feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding: clamp(2.25rem, 3.5vw, 3.25rem) 0;
+  border-top: 1px solid var(--hairline);
+}
+.feature:first-of-type { border-top: 0; }
+.feature:nth-child(even) .feature__art { order: -1; }
+@media (max-width: 900px) {
+  .feature { grid-template-columns: 1fr; gap: 2.25rem; }
+  .feature:nth-child(even) .feature__art { order: 0; }
+}
+
+.feature__copy h3 { margin: .85rem 0 0; }
+.feature__copy p { margin-top: .9rem; }
+
+.feature__list {
+  margin: 1.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.feature__list li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: .975rem;
+}
+.feature__list li::before {
+  content: "";
+  position: absolute;
+  left: .1rem;
+  top: .62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+.feature__art { display: grid; place-items: center; }
+.feature__art .device { --device-w: 268px; }
+
+/* ==========================================================================
+   privacy band
+   ========================================================================== */
+.vows {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 1.5rem;
+  margin-top: clamp(2.25rem, 4vw, 3.25rem);
+  list-style: none;
+  padding: 0;
+}
+.vow {
+  padding: 1.6rem 1.5rem;
+  background: color-mix(in srgb, var(--panel-ink) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--panel-ink) 11%, transparent);
+  border-radius: 18px;
+}
+.vow svg { width: 22px; height: 22px; color: var(--leaf); margin-bottom: .9rem; }
+.vow h3 { font-size: 1.075rem; }
+.vow p { margin-top: .5rem; font-size: .94rem; max-width: none; }
+
+/* ==========================================================================
+   honest-limits band — the "before you connect" list, kept on the page on
+   purpose: it is the most trust-building copy PomoStats has.
+   ========================================================================== */
+.limits {
+  margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  max-width: 74ch;
+}
+.limits li {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: .5rem;
+  padding: 1.05rem 0;
+  border-top: 1px solid var(--hairline);
+  font-size: .985rem;
+}
+.limits li:last-child { border-bottom: 1px solid var(--hairline); }
+.limits b {
+  font-family: var(--mono);
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: var(--ink-sub);
+  padding-top: .32em;
+}
+.limits p { max-width: none; }
+
+/* ==========================================================================
+   pricing / premium
+   ========================================================================== */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+.tier {
+  padding: 1.75rem 1.65rem;
+  background: var(--paper);
+  border: 1px solid var(--card-line);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+}
+.tier--flag {
+  background: var(--panel);
+  border-color: transparent;
+  box-shadow: var(--card-shadow-lg);
+}
+.tier--flag h3, .tier--flag .tier__price { color: var(--panel-ink); }
+.tier--flag p, .tier--flag .tier__note { color: var(--panel-sub); }
+.tier--flag .tier__list li { color: color-mix(in srgb, var(--panel-ink) 82%, transparent); }
+.tier--flag .tier__list li::before { background: var(--leaf); }
+
+.tier__price {
+  font-family: var(--display);
+  font-size: clamp(1.85rem, 1.5rem + 1.2vw, 2.35rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1;
+  margin-top: .9rem;
+  font-variation-settings: "opsz" 60;
+}
+.tier__price span {
+  font-family: var(--body);
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--ink-sub);
+  letter-spacing: 0;
+}
+.tier--flag .tier__price span { color: var(--panel-sub); }
+.tier__note { margin-top: .5rem; font-size: .875rem; color: var(--ink-sub); }
+.tier__list {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  font-size: .95rem;
+}
+.tier__list li { position: relative; padding-left: 1.35rem; }
+.tier__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--leaf);
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+.faq { margin-top: clamp(2rem, 4vw, 2.75rem); max-width: 76ch; }
+.faq details {
+  border-top: 1px solid var(--hairline);
+}
+.faq details:last-of-type { border-bottom: 1px solid var(--hairline); }
+.faq summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  list-style: none;
+  font-variation-settings: "opsz" 40;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "";
+  flex: none;
+  width: 11px;
+  height: 11px;
+  margin-top: .45em;
+  border-right: 2px solid var(--ink-sub);
+  border-bottom: 2px solid var(--ink-sub);
+  rotate: 45deg;
+  transition: rotate .22s ease;
+}
+.faq details[open] summary::after { rotate: 225deg; }
+.faq details > div {
+  padding: 0 0 1.4rem;
+  max-width: 68ch;
+}
+.faq details > div p + p { margin-top: .8rem; }
+
+/* ==========================================================================
+   closing call to action
+   ========================================================================== */
+.closer { text-align: center; }
+.closer h2 { margin: 1rem auto 0; max-width: 26ch; }
+.closer p { margin: 1.25rem auto 0; }
+.closer .hero__cta { justify-content: center; }
+.closer .hero__fineprint { text-align: center; }
+
+/* ==========================================================================
+   footer
+   ========================================================================== */
+.foot {
+  padding: clamp(2.75rem, 5vw, 4rem) 0 3rem;
+  border-top: 1px solid var(--hairline);
+  font-size: .9rem;
+  color: var(--ink-sub);
+}
+.foot__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.foot__brand .wordmark { margin-right: 0; }
+
+.byline {
+  margin-top: .6rem;
+  font-size: .875rem;
+  color: var(--ink-sub);
+}
+.byline a {
+  color: var(--ink);
+  text-decoration-color: var(--pill-line);
+  text-underline-offset: 3px;
+  transition: text-decoration-color .18s ease;
+}
+.byline a:hover { text-decoration-color: var(--accent); }
+
+.foot nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.5rem;
+}
+.foot nav a { text-decoration: none; }
+.foot nav a:hover { color: var(--ink); text-decoration: underline; }
+.foot__legal {
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hairline);
+  font-size: .8125rem;
+  line-height: 1.6;
+  max-width: 78ch;
+}
+.foot__legal p + p { margin-top: .6rem; }
+
+.dialect {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--ink);
+  font-variation-settings: "opsz" 24, "SOFT" 40, "WONK" 1;
+}
+
+/* ==========================================================================
+   scroll reveal — one motion idea, applied consistently
+   ========================================================================== */
+/* Progressive enhancement, deliberately: the hidden state is scoped to .js,
+   which main.js adds to <html>. Without JS — or if main.js fails to load — no
+   element is ever hidden and the page is simply a static page. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    translate: 0 22px;
+    transition: opacity .7s cubic-bezier(.16, 1, .3, 1), translate .7s cubic-bezier(.16, 1, .3, 1);
+    transition-delay: var(--d, 0ms);
+  }
+  .js .reveal.is-in { opacity: 1; translate: 0 0; }
+}
+
+/* ==========================================================================
+   the mark — the shipped launcher icon's own paths (green fruit, trend-line
+   cut), re-coloured from the token set so it works on either field.
+   ========================================================================== */
+.fruit__body { fill: var(--leaf); }
+.fruit__stem { stroke: var(--leaf); }
+.fruit__cut  { stroke: var(--field); }
+
+.band--panel .fruit__cut { stroke: var(--panel); }
+.band--deep  .fruit__cut { stroke: var(--field-deep); }
+
+/* the footer mark sits on --field, which is what .fruit__cut already uses */

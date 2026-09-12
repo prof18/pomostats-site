@@ -1,0 +1,13 @@
+{
+  "name": "PomoStats",
+  "short_name": "PomoStats",
+  "description": "App Store Connect stats on Android.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#EFEBDF",
+  "theme_color": "#EFEBDF",
+  "icons": [
+    { "src": "/assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

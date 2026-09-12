@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ==========================================================================
+     Canonical origin: https://pomostats.app  (confirmed 12 September 2026)
+     Used by the canonical link, og:url, og:image, the JSON-LD @ids, sitemap.xml
+     and robots.txt. Keep them all on the same origin, with the trailing slash on
+     the homepage, or the canonical and og:url disagree.
+
+     .app is an HSTS-preloaded TLD, so https is not optional: browsers refuse
+     http:// on this domain outright. Never introduce an http:// URL here.
+     ========================================================================== -->
+
+<title>PomoStats — App Store Connect stats on Android</title>
+<meta name="description" content="Track App Store Connect downloads, sales proceeds, reviews and TestFlight builds from your Android phone. Your API key never leaves the device.">
+
+<link rel="canonical" href="https://pomostats.app/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#EFEBDF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0F140F" media="(prefers-color-scheme: dark)">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PomoStats">
+<meta property="og:title" content="PomoStats — App Store Connect stats on Android">
+<meta property="og:description" content="Track App Store Connect downloads, sales proceeds, reviews and TestFlight builds from your Android phone. Your API key never leaves the device.">
+<meta property="og:url" content="https://pomostats.app/">
+<meta property="og:image" content="https://pomostats.app/assets/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PomoStats — App Store Connect stats on Android">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PomoStats — App Store Connect stats on Android">
+<meta name="twitter:description" content="Track App Store Connect downloads, sales proceeds, written reviews and TestFlight build status from your Android phone.">
+<meta name="twitter:image" content="https://pomostats.app/assets/og-image.jpg">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/screenshots/home.webp" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter+Tight:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+
+<script>
+/* Marks the document as scripted so the scroll-reveal's hidden state can be scoped
+   to it — see .js .reveal in styles.css. Runs here, not in main.js, so it lands
+   before first paint. The theme is the device's own: prefers-color-scheme decides
+   it in CSS, with nothing stored and nothing to restore. */
+document.documentElement.classList.add("js");
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead" id="masthead">
+  <div class="shell masthead__row">
+    <a class="wordmark" href="#top" aria-label="PomoStats home">
+      <svg viewBox="28 27 52 55" aria-hidden="true" focusable="false" class="fruit">
+          <path class="fruit__body" d="M54,43.29C60.12,37.18 78.47,40.24 78.47,58.59C78.47,72.35 66.24,80 54,80C41.76,80 29.53,72.35 29.53,58.59C29.53,40.24 47.88,37.18 54,43.29Z"/>
+          <path class="fruit__body" d="M55.53,39.47Q64.55,39.16 68.53,31.06Q59.51,31.36 55.53,39.47Z"/>
+          <path class="fruit__stem" d="M54.76,41.76L56.68,30.29" stroke-width="3.82" fill="none" stroke-linecap="round"/>
+          <path class="fruit__cut" d="M36.41,67L44.82,60.12L54,63.94L71.59,49.41" stroke-linejoin="round" stroke-width="6.88" fill="none" stroke-linecap="round"/>
+      </svg>
+      <b>PomoStats</b>
+    </a>
+
+    <nav aria-label="Sections">
+      <a href="#track">What you can track</a>
+      <a href="#key">Your key</a>
+      <a href="#demo">Sample data</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="shell hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">Unofficial App Store Connect client</p>
+
+      <h1>App Store Connect,<br>on <span class="mark">Android</span>.</h1>
+
+      <p class="hero__lede">
+        You build for Apple. Your phone runs Android. PomoStats puts your downloads,
+        sales proceeds, written reviews and TestFlight build status on the phone
+        that's actually in your hand.
+      </p>
+
+      <div class="hero__cta">
+        <a class="btn btn--play" href="https://play.google.com/store/apps/details?id=com.prof18.pomostats"
+           rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M3.6 1.8a1.5 1.5 0 0 0-.5 1.1v18.2a1.5 1.5 0 0 0 .5 1.1l9.6-10.2L3.6 1.8Z" opacity=".85"/>
+            <path fill="currentColor" d="M17.2 8.3 14 6.4 4.3 1.1a1.4 1.4 0 0 0-.7-.2l9.6 10.2 4-2.8Z"/>
+            <path fill="currentColor" d="m17.2 15.7-4-2.8L3.6 23.1c.25 0 .5-.07.7-.2l9.7-5.3 3.2-1.9Z"/>
+            <path fill="currentColor" d="M21 10.7 17.2 8.3l-4 2.8 4 2.8L21 13.3a1.5 1.5 0 0 0 0-2.6Z" opacity=".85"/>
+          </svg>
+          Get it on Google Play
+        </a>
+        <a class="btn btn--ghost" href="#track">See every screen</a>
+      </div>
+
+      <p class="hero__fineprint">
+        Android 9.0+ · Your key never leaves the phone
+      </p>
+
+      <dl class="slab">
+        <div>
+          <dt>On device</dt>
+          <dd>No backend<small>Reports come from Apple to your phone — not through a PomoStats server.</small></dd>
+        </div>
+        <div>
+          <dt>Your key</dt>
+          <dd>Encrypted on device<small>Kept in the app's private storage and left out of cloud backups.</small></dd>
+        </div>
+        <div>
+          <dt>No key yet</dt>
+          <dd>Sample data<small>Browse a full demo portfolio before you connect anything.</small></dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="hero__art">
+      <div class="device device--hero">
+        <img src="assets/screenshots/home.webp" width="1080" height="2280"
+             fetchpriority="high" decoding="async"
+             alt="PomoStats home screen on Android: a proceeds panel showing $4,849 over 30 days, and app cards for Gondola Weather and Orbit Studio with monthly active devices split by iOS and macOS.">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHAT YOU CAN TRACK ===================== -->
+<section class="band" id="track">
+  <div class="shell">
+    <div class="band__head reveal">
+      <p class="eyebrow">What you can track</p>
+      <h2>Every number Apple gives you, charted on the range you pick.</h2>
+      <p>
+        Connect an App Store Connect API key and PomoStats pulls your analytics reports,
+        sales reports, written reviews and build states. Apple splits its analytics by
+        platform, so PomoStats does too — iOS, macOS, tvOS, watchOS and visionOS are
+        separate figures on the same app, never separate apps.
+      </p>
+    </div>
+
+    <!-- 01 analytics -->
+    <article class="feature reveal">
+      <div class="feature__copy">
+        <p class="eyebrow">01 — App analytics</p>
+        <h3>Downloads, active devices, sessions, crashes.</h3>
+        <p>
+          Pick a platform and a range — latest day, 7, 30 or 90 days — and every metric
+          re-charts against it. Crashes and session counts come from the users who agreed
+          to share analytics with developers, and PomoStats labels them that way.
+        </p>
+        <ul class="feature__list">
+          <li>Downloads, redownloads, updates and deletions</li>
+          <li>Daily and monthly active devices</li>
+          <li>Sessions and opt-in crash counts</li>
+          <li>Impressions, product page views and conversion rate</li>
+        </ul>
+      </div>
+      <div class="feature__art">
+        <div class="device">
+          <img src="assets/screenshots/analytics.webp" width="900" height="1900" loading="lazy" decoding="async"
+               alt="App detail screen for Gondola Weather: a Platform · iOS selector, a 7-day bar chart of daily active devices, metric chips for Downloads, DAU, MAU and Sessions, and cards for proceeds, crashes and deletions.">
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 reviews -->
+    <article class="feature reveal">
+      <div class="feature__copy">
+        <p class="eyebrow">02 — Reviews</p>
+        <h3>A one-star lands. You know.</h3>
+        <p>
+          Browse, filter and sort every written review across your apps, by rating, by app
+          or by territory. PomoStats checks for new ones in the background and raises a
+          notification when it finds them — reviews are the only thing it notifies about.
+        </p>
+        <ul class="feature__list">
+          <li>Filter by app, unread state, star rating or territory</li>
+          <li>Average and star breakdown, computed from written reviews</li>
+          <li>Read the developer response alongside the review</li>
+          <li>Notifications on new reviews, nothing else</li>
+        </ul>
+      </div>
+      <div class="feature__art">
+        <div class="device">
+          <img src="assets/screenshots/reviews.webp" width="900" height="1900" loading="lazy" decoding="async"
+               alt="Reviews inbox with filter chips for all apps, unread, star rating and territory, listing reviews from Mira, Lin and Jon with their star ratings and text.">
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 proceeds -->
+    <article class="feature reveal">
+      <div class="feature__copy">
+        <p class="eyebrow">03 — Sales proceeds</p>
+        <h3>What Apple actually pays you, in a currency you can read.</h3>
+        <p>
+          Daily proceeds and twelve months of history. Apple reports in the currency of each
+          storefront, so PomoStats converts to one display currency you choose — and says,
+          once, which day's exchange rates it used rather than stamping a marker on every figure.
+        </p>
+        <ul class="feature__list">
+          <li>Latest day, day-before comparison and 90-day trend</li>
+          <li>Twelve months of proceeds history</li>
+          <li>Display currency of your choosing, device locale by default</li>
+          <li>Apps with no paid tier simply show no proceeds</li>
+        </ul>
+      </div>
+      <div class="feature__art">
+        <div class="device">
+          <img src="assets/screenshots/proceeds.webp" width="900" height="1900" loading="lazy" decoding="async"
+               alt="Sales history section showing proceeds for the last twelve months as a bar chart with monthly figures beneath it.">
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 countries -->
+    <article class="feature reveal">
+      <div class="feature__copy">
+        <p class="eyebrow">04 — Territories</p>
+        <h3>Where the downloads and the money come from.</h3>
+        <p>
+          Downloads and proceeds broken down by country, on the same range control as
+          everything else. Useful the first time you notice a storefront you have never
+          localised for out-earning the one you have.
+        </p>
+        <ul class="feature__list">
+          <li>Downloads per territory over the range you picked</li>
+          <li>Proceeds per territory, in your display currency</li>
+          <li>Reviews filterable by territory too</li>
+          <li>Whole-app figures, not split per platform</li>
+        </ul>
+      </div>
+      <div class="feature__art">
+        <div class="device">
+          <img src="assets/screenshots/countries.webp" width="900" height="1900" loading="lazy" decoding="async"
+               alt="By-country breakdown listing territories with their download counts and proceeds for the selected range.">
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 releases -->
+    <article class="feature reveal">
+      <div class="feature__copy">
+        <p class="eyebrow">05 — Releases</p>
+        <h3>In review, or ready for sale.</h3>
+        <p>
+          Where each version sits in App Review, and the latest TestFlight build with its
+          processing state — so you can stop refreshing a browser tab on your laptop to find
+          out whether the build finished processing.
+        </p>
+        <ul class="feature__list">
+          <li>App Review state per version, per platform</li>
+          <li>Latest TestFlight build and whether it is still processing</li>
+          <li>Version and build numbers as Apple has them</li>
+          <li>Release state changes are shown, not pushed as notifications</li>
+        </ul>
+      </div>
+      <div class="feature__art">
+        <div class="device">
+          <img src="assets/screenshots/releases.webp" width="900" height="1900" loading="lazy" decoding="async"
+               alt="Releases section showing version 2.4.0 live on the App Store and ready for sale, version 2.5.0 in review, and TestFlight build 108 uploaded on 11 September 2026, above the ratings breakdown and a by-country download list.">
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== YOUR KEY ===================== -->
+<section class="band band--panel" id="key">
+  <div class="shell">
+    <div class="band__head reveal">
+      <p class="eyebrow eyebrow--panel">Your API key</p>
+      <h2>There is no PomoStats server for your data to sit on.</h2>
+      <p>
+        An App Store Connect API key can read your whole account. PomoStats treats it that
+        way: the key is used on your device to sign requests to Apple, and the reports come
+        back to your device. Nothing about your apps is relayed through infrastructure we own.
+      </p>
+    </div>
+
+    <ul class="vows reveal">
+      <li class="vow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="10.5" width="16" height="11" rx="2.5"/>
+          <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/>
+        </svg>
+        <h3>Encrypted on your phone</h3>
+        <p>
+          Your key is encrypted using the Android Keystore — the same hardware-backed store
+          the system uses for its own secrets — kept in the app's private storage and
+          excluded from cloud backups.
+        </p>
+      </li>
+      <li class="vow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3.2 4.5 6.4v5.2c0 4.6 3.1 8.2 7.5 9.4 4.4-1.2 7.5-4.8 7.5-9.4V6.4Z"/>
+          <path d="M9.2 12.2l2 2 3.6-3.9"/>
+        </svg>
+        <h3>No account to make</h3>
+        <p>
+          There is no PomoStats sign-up, no email, no password. You connect Apple's key and
+          that is the whole of it.
+        </p>
+      </li>
+      <li class="vow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 3l18 18"/>
+          <path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.4 9 7 0 .8-.4 1.8-1.1 2.8"/>
+          <path d="M6.3 7.2C4.2 8.6 3 10.6 3 12c0 2.6 4 7 9 7 1.6 0 3.1-.45 4.4-1.15"/>
+          <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+        </svg>
+        <h3>Protected while you paste</h3>
+        <p>
+          The key-entry screen blocks screen capture, and the clipboard is cleared after you
+          paste — so the key does not linger where another app can read it.
+        </p>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- ===================== SAMPLE DATA ===================== -->
+<section class="band band--deep" id="demo">
+  <div class="shell hero__grid">
+    <div>
+      <p class="eyebrow reveal">Sample data</p>
+      <h2 class="reveal" style="margin-top:.9rem;">Look around before you hand over a key.</h2>
+      <p class="reveal" style="margin-top:1.25rem;">
+        Tap <strong>Try with sample data</strong> on the welcome screen and PomoStats loads a
+        bundled demo portfolio. Every screen becomes reachable — home, app detail with its
+        charts and country breakdowns, reviews, releases, settings — with no App Store Connect
+        key involved at all.
+      </p>
+      <p class="reveal" style="margin-top:1rem;">
+        Every screenshot on this page is that demo mode, captured on a Pixel. Nothing here is
+        a mockup.
+      </p>
+      <div class="hero__cta reveal">
+        <a class="btn btn--play" href="https://play.google.com/store/apps/details?id=com.prof18.pomostats"
+           rel="noopener">Try the sample portfolio</a>
+      </div>
+    </div>
+    <div class="feature__art reveal">
+      <div class="device">
+        <img src="assets/screenshots/demo.webp" width="900" height="1900" loading="lazy" decoding="async"
+             alt="PomoStats onboarding welcome screen with a Try with sample data option below the App Store Connect key setup.">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HONEST LIMITS ===================== -->
+<section class="band" id="limits">
+  <div class="shell">
+    <div class="band__head reveal">
+      <p class="eyebrow">Before you connect</p>
+      <h2>The parts worth knowing in advance.</h2>
+      <p>
+        These are properties of Apple's API, not bugs, and they do not go away. Better you read
+        them here than discover them on day two.
+      </p>
+    </div>
+
+    <ol class="limits reveal">
+      <li>
+        <b>01</b>
+        <p>
+          You need an App Store Connect API key. Analytics reports require a key with the
+          <strong>Admin</strong> role; reviews and TestFlight status work with less.
+        </p>
+      </li>
+      <li>
+        <b>02</b>
+        <p>
+          Apple generates analytics once a day, so figures can lag by a day or more.
+          PomoStats always shows the date of the data it is holding.
+        </p>
+      </li>
+      <li>
+        <b>03</b>
+        <p>
+          Usage metrics — active devices, sessions and crashes — only count users who agreed
+          to share analytics with developers. They are a sample, not your install base.
+        </p>
+      </li>
+      <li>
+        <b>04</b>
+        <p>
+          After you connect an account, Apple can take <strong>24 to 48 hours</strong> to
+          produce the first analytics report. The first sync is not the whole picture.
+        </p>
+      </li>
+      <li>
+        <b>05</b>
+        <p>
+          New reviews are found through periodic background checks. Apple does not push them,
+          so a review appears at the next check rather than the moment it is written.
+        </p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="band band--deep" id="faq">
+  <div class="shell">
+    <div class="band__head reveal">
+      <p class="eyebrow">Questions</p>
+      <h2>Frequently asked.</h2>
+    </div>
+
+    <div class="faq reveal">
+      <details>
+        <summary>Is PomoStats made by Apple?</summary>
+        <div>
+          <p>
+            No. PomoStats is an independent, unofficial App Store Connect client, built by one
+            developer. It is not affiliated with, endorsed by, or sponsored by Apple Inc.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Where is my App Store Connect API key stored?</summary>
+        <div>
+          <p>
+            On your phone only. The key is encrypted with the Android Keystore, held in the
+            app's private storage, and excluded from cloud backups. PomoStats uses it on the
+            device to sign requests to Apple's API; there is no PomoStats server in the path
+            and no PomoStats account to attach it to.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Can I try it without an API key?</summary>
+        <div>
+          <p>
+            Yes. Tap <strong>Try with sample data</strong> on the welcome screen. A bundled
+            demo portfolio loads and every screen in the app becomes reachable, with no
+            credentials of any kind.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Which App Store Connect role does my key need?</summary>
+        <div>
+          <p>
+            Analytics reports — downloads, active devices, sessions, crashes and the store
+            funnel — require a key with the <strong>Admin</strong> role, because that is what
+            Apple's analytics report endpoints demand. Written reviews and TestFlight build
+            status work with a less privileged key.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Why do my numbers differ from App Store Connect on the web?</summary>
+        <div>
+          <p>
+            Most often it is the date. Apple produces analytics once a day and PomoStats shows
+            the date of the report it holds, so a figure can trail the web dashboard by a day
+            or more.
+          </p>
+          <p>
+            The other common cause is scope: usage metrics count only users who agreed to share
+            analytics with developers, and Apple splits its analytics per platform, so an iOS
+            figure and a macOS figure are reported separately for the same app.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Does it support iPad, Mac, Apple TV, Apple Watch and Vision Pro apps?</summary>
+        <div>
+          <p>
+            Yes. Apple reports analytics per platform, and PomoStats classifies every Apple
+            platform explicitly — iOS, macOS, tvOS, watchOS and visionOS. Platform is a
+            dimension of an app in PomoStats: you switch between them from a menu in the app's
+            header rather than seeing the same app listed several times.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>How do review notifications work?</summary>
+        <div>
+          <p>
+            PomoStats checks for new written reviews on a periodic background schedule and
+            raises a local notification when it finds one. Apple does not push review events,
+            so this is a poll rather than a live feed — a new review shows up at the next check.
+            New reviews are the only thing PomoStats notifies about.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>What does Premium unlock?</summary>
+        <div>
+          <p>
+            Premium raises a limit rather than unlocking features. The free tier covers one
+            app — the full product on that app, with its whole history, every chart and its
+            notifications — and Premium lifts the one-app limit. Nothing is gated on depth:
+            every metric, review filter and release state is there either way. Both an annual
+            subscription and a one-time lifetime purchase are offered.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Why "PomoStats"?</summary>
+        <div>
+          <p><span class="dialect">Pomo</span> is "apple" in the Venetian dialect.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLOSER ===================== -->
+<section class="band closer">
+  <div class="shell reveal">
+    <p class="eyebrow">Get PomoStats</p>
+    <h2>Your apps are doing something right now. Go and look.</h2>
+    <p>
+      Made for Apple developers carrying an Android phone.
+    </p>
+    <div class="hero__cta">
+      <a class="btn btn--play" href="https://play.google.com/store/apps/details?id=com.prof18.pomostats"
+         rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M3.6 1.8a1.5 1.5 0 0 0-.5 1.1v18.2a1.5 1.5 0 0 0 .5 1.1l9.6-10.2L3.6 1.8Z" opacity=".85"/>
+          <path fill="currentColor" d="M17.2 8.3 14 6.4 4.3 1.1a1.4 1.4 0 0 0-.7-.2l9.6 10.2 4-2.8Z"/>
+          <path fill="currentColor" d="m17.2 15.7-4-2.8L3.6 23.1c.25 0 .5-.07.7-.2l9.7-5.3 3.2-1.9Z"/>
+          <path fill="currentColor" d="M21 10.7 17.2 8.3l-4 2.8 4 2.8L21 13.3a1.5 1.5 0 0 0 0-2.6Z" opacity=".85"/>
+        </svg>
+        Get it on Google Play
+      </a>
+    </div>
+    <p class="hero__fineprint">Android 9.0+ · Sample data works without a key</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="foot__row">
+      <div class="foot__brand">
+        <a class="wordmark" href="#top" aria-label="PomoStats home">
+          <svg viewBox="28 27 52 55" aria-hidden="true" focusable="false" class="fruit">
+            <path class="fruit__body" d="M54,43.29C60.12,37.18 78.47,40.24 78.47,58.59C78.47,72.35 66.24,80 54,80C41.76,80 29.53,72.35 29.53,58.59C29.53,40.24 47.88,37.18 54,43.29Z"/>
+            <path class="fruit__body" d="M55.53,39.47Q64.55,39.16 68.53,31.06Q59.51,31.36 55.53,39.47Z"/>
+            <path class="fruit__stem" d="M54.76,41.76L56.68,30.29" stroke-width="3.82" fill="none" stroke-linecap="round"/>
+            <path class="fruit__cut" d="M36.41,67L44.82,60.12L54,63.94L71.59,49.41" stroke-linejoin="round" stroke-width="6.88" fill="none" stroke-linecap="round"/>
+          </svg>
+          <b>PomoStats</b>
+        </a>
+        <p class="byline">Built by <a href="https://www.marcogomiero.com/" rel="me noopener">Marco&nbsp;Gomiero</a></p>
+      </div>
+
+      <nav aria-label="Footer">
+        <a href="https://play.google.com/store/apps/details?id=com.prof18.pomostats" rel="noopener">Google&nbsp;Play</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+
+    <div class="foot__legal">
+      <p>
+        PomoStats is an independent app. It is not affiliated with, endorsed by, or sponsored by
+        Apple Inc. Apple, App Store, App Store Connect and TestFlight are trademarks of Apple Inc.
+        Google Play and the Google Play logo are trademarks of Google LLC.
+      </p>
+      <p>
+        <span class="dialect">Pomo</span> is "apple" in the Venetian dialect.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== structured data ===================== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://pomostats.app/#app",
+      "name": "PomoStats",
+      "alternateName": "PomoStats — App Store stats",
+      "applicationCategory": "DeveloperApplication",
+      "applicationSubCategory": "Analytics",
+      "operatingSystem": "Android 9.0+",
+      "url": "https://pomostats.app/",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.prof18.pomostats",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.prof18.pomostats",
+      "image": "https://pomostats.app/assets/og-image.jpg",
+      "screenshot": [
+        "https://pomostats.app/assets/screenshots/home.webp",
+        "https://pomostats.app/assets/screenshots/analytics.webp",
+        "https://pomostats.app/assets/screenshots/reviews.webp"
+      ],
+      "description": "An unofficial App Store Connect client for Android. Track app downloads, active devices, sessions, crashes, the store funnel, sales proceeds, written reviews, country breakdowns and TestFlight build status. The App Store Connect API key is encrypted with the Android Keystore and stays on the device.",
+      "featureList": [
+        "App Store Connect analytics: downloads, redownloads, updates, deletions, active devices, sessions and crashes",
+        "Store funnel: impressions, product page views and conversion rate",
+        "Sales proceeds with twelve months of history in a chosen display currency",
+        "Written App Store reviews with filters and notifications on new reviews",
+        "Ratings average and star breakdown derived from written reviews",
+        "Downloads and proceeds by territory",
+        "TestFlight build processing state and App Review status",
+        "Per-platform figures for iOS, macOS, tvOS, watchOS and visionOS",
+        "Sample data mode that needs no API key"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://pomostats.app/#site",
+      "url": "https://pomostats.app/",
+      "name": "PomoStats",
+      "description": "App Store Connect stats on Android.",
+      "inLanguage": "en",
+      "about": { "@id": "https://pomostats.app/#app" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://pomostats.app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is PomoStats made by Apple?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. PomoStats is an independent, unofficial App Store Connect client, built by one developer. It is not affiliated with, endorsed by, or sponsored by Apple Inc."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is my App Store Connect API key stored?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "On your phone only. The key is encrypted with the Android Keystore, held in the app's private storage, and excluded from cloud backups. PomoStats uses it on the device to sign requests to Apple's API; there is no PomoStats server in the path and no PomoStats account to attach it to."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I try it without an API key?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Tap \"Try with sample data\" on the welcome screen. A bundled demo portfolio loads and every screen in the app becomes reachable, with no credentials of any kind."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which App Store Connect role does my key need?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Analytics reports — downloads, active devices, sessions, crashes and the store funnel — require a key with the Admin role, because that is what Apple's analytics report endpoints demand. Written reviews and TestFlight build status work with a less privileged key."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do my numbers differ from App Store Connect on the web?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most often it is the date: Apple produces analytics once a day and PomoStats shows the date of the report it holds, so a figure can trail the web dashboard by a day or more. The other common cause is scope — usage metrics count only users who agreed to share analytics with developers, and Apple splits its analytics per platform, so an iOS figure and a macOS figure are reported separately for the same app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it support iPad, Mac, Apple TV, Apple Watch and Vision Pro apps?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Apple reports analytics per platform, and PomoStats classifies every Apple platform explicitly — iOS, macOS, tvOS, watchOS and visionOS. Platform is a dimension of an app in PomoStats: you switch between them from a menu in the app's header rather than seeing the same app listed several times."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do review notifications work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PomoStats checks for new written reviews on a periodic background schedule and raises a local notification when it finds one. Apple does not push review events, so this is a poll rather than a live feed — a new review shows up at the next check. New reviews are the only thing PomoStats notifies about."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does Premium unlock?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Premium raises a limit rather than unlocking features. The free tier covers one app — the full product on that app, with its whole history, every chart and its notifications — and Premium lifts the one-app limit. Nothing is gated on depth: every metric, review filter and release state is there either way. Both an annual subscription and a one-time lifetime purchase are offered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why \"PomoStats\"?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pomo is \"apple\" in the Venetian dialect."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="assets/main.js" defer></script>
+</body>
+</html>

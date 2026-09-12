@@ -1,0 +1,35 @@
+appId: com.prof18.pomostats.debug
+---
+- clearState
+- launchApp
+- scrollUntilVisible:
+    element:
+      text: "Try with sample data"
+    direction: DOWN
+- tapOn: "Try with sample data"
+- extendedWaitUntil:
+    visible: "Gondola Weather"
+    timeout: 20000
+- tapOn: "7D"
+- extendedWaitUntil:
+    visible: "YOUR APPS"
+    timeout: 15000
+- tapOn: "Gondola Weather"
+- extendedWaitUntil:
+    visible: "DAILY ACTIVE DEVICES · 7D"
+    timeout: 20000
+- scrollUntilVisible:
+    element:
+      text: "RELEASES"
+    direction: DOWN
+    centerElement: true
+    visibilityPercentage: 100
+    timeout: 40000
+# Centering leaves the store-conversion card filling the top half. Nudge the page
+# up so the RELEASES header leads the frame instead.
+- swipe:
+    start: 50%, 60%
+    end: 50%, 26%
+    duration: 500
+- assertVisible: "RELEASES"
+- takeScreenshot: 08-app-detail-releases
