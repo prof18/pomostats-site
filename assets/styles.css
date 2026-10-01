@@ -5,34 +5,36 @@
    every value below exists in the app or is derived from it.
    ========================================================================== */
 
-/* ---------- tokens: light (default) ---------- */
+/* ---------- tokens: light (default) ----------
+   The app's Material 3 Expressive palette: its apple-seeded fallback scheme, the colours it
+   wears when the wallpaper offers none (FallbackSchemeExportTest in the app repo). */
 :root {
-  --field:        #EFEBDF;   /* app bg  */
-  --field-deep:   #e7e2d4;   /* app stage */
-  --paper:        #FBF9F2;   /* cardBg  */
-  --ink:          #1C2620;   /* text    */
-  --ink-body:     #2b352d;   /* body    */
-  --ink-sub:      #616659;   /* the app's sub hue at 70%: AA on field, deep and paper */
-  --accent:       #D8483C;
-  --accent-ink:   #b93a30;   /* accent, darkened for text-on-field contrast */
-  --leaf:         #35734A;   /* up / brand fruit */
-  --leaf-deep:    #2a5d3b;
-  --star:         #E0A100;
+  --field:        #F6FBF3;   /* surface */
+  --field-deep:   #EAEFE7;   /* surfaceContainer */
+  --paper:        #FFFFFF;   /* surfaceContainerLowest — cards */
+  --ink:          #181D18;   /* onSurface */
+  --ink-body:     #2A302A;
+  --ink-sub:      #414941;   /* onSurfaceVariant */
+  --accent:       #2F6A43;   /* primary */
+  --accent-ink:   #2F6A43;
+  --leaf:         #2F6A43;
+  --leaf-deep:    #13512D;   /* onPrimaryContainer */
+  --star:         #7A5900;
 
-  --panel:        #1C2620;   /* statBg — the dark green-black slab */
-  --panel-ink:    #F3F0E6;   /* statText */
-  --panel-sub:    #8ba491;   /* statSub  */
-  --panel-line:   #33403790;
+  --panel:        #B2F1C0;   /* primaryContainer — the proceeds panel */
+  --panel-ink:    #13512D;   /* onPrimaryContainer */
+  --panel-sub:    #2F6A43;
+  --panel-line:   #13512D30;
 
-  --hairline:     #ded7c5;
-  --pill-line:    #cfc9b8;
+  --hairline:     #DDE5DA;
+  --pill-line:    #C1C9BF;   /* outlineVariant */
   --card-line:    transparent;
-  --card-shadow:  0 2px 6px -2px rgba(28, 38, 32, .12);
-  --card-shadow-lg: 0 24px 60px -28px rgba(28, 38, 32, .38);
-  --frame:        #d3cebe;   /* frameBorder */
-  --frame-glint:  #fffdf6;
+  --card-shadow:  0 2px 6px -2px rgba(24, 29, 24, .10);
+  --card-shadow-lg: 0 28px 64px -28px rgba(24, 29, 24, .34);
+  --frame:        #181D18;
+  --frame-glint:  #3a423a;
 
-  --grain:        .035;
+  --grain:        0;
   --scheme:       light;
 }
 
@@ -41,41 +43,42 @@
    media query is the only place dark is defined. ---------- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --field:      #0F140F;
-    --field-deep: #080a08;
-    --paper:      #18211A;
-    --ink:        #F1EEE4;
-    --ink-body:   #d5d2c7;
-    --ink-sub:    #93a094;   /* lifted from #7d887e for AA on --field */
-    --accent:     #E4544A;
-    --accent-ink: #f0736a;
-    --leaf:       #7CC98B;
-    --leaf-deep:  #6FBE82;
-    --star:       #F0B429;
+    --field:      #101510;
+    --field-deep: #0B0F0B;
+    --paper:      #1C211C;   /* surfaceContainer */
+    --ink:        #DFE4DC;
+    --ink-body:   #C9CFC6;
+    --ink-sub:    #C1C9BF;
+    --accent:     #97D5A5;   /* primary */
+    --accent-ink: #97D5A5;
+    --leaf:       #97D5A5;
+    --leaf-deep:  #B2F1C0;
+    --star:       #F2C14E;
 
-    --panel:      #18211A;
-    --panel-ink:  #F1EEE4;
-    --panel-sub:  #93a094;
-    --panel-line: #2a3430;
+    --panel:      #13512D;   /* primaryContainer */
+    --panel-ink:  #B2F1C0;
+    --panel-sub:  #97D5A5;
+    --panel-line: #B2F1C030;
 
-    --hairline:   #232e25;
-    --pill-line:  #2a3430;
-    --card-line:  #212c23;
+    --hairline:   #262C26;
+    --pill-line:  #414941;
+    --card-line:  #262C26;
     --card-shadow: none;
     --card-shadow-lg: 0 24px 60px -30px rgba(0, 0, 0, .8);
-    --frame:      #232e25;
-    --frame-glint:#2b3a2d;
+    --frame:      #0B0F0B;
+    --frame-glint:#2a302a;
 
-    --grain:      .05;
+    --grain:      0;
     --scheme:     dark;
   }
 }
 
 /* ---------- type + rhythm ---------- */
 :root {
-  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
-  --body:    "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  /* One typeface, as in the app: Google Sans Flex, heavier for headings. */
+  --display: "Google Sans Flex", "Helvetica Neue", Arial, sans-serif;
+  --body:    "Google Sans Flex", "Helvetica Neue", Arial, sans-serif;
+  --mono:    "Google Sans Flex", "Helvetica Neue", Arial, sans-serif;
 
   --gut:     clamp(1.25rem, 4vw, 2.5rem);
   --measure: 62ch;
@@ -106,8 +109,8 @@ body {
   overflow-x: hidden;
 }
 
-/* the tactile part of "Harvest": a fibre grain over the whole field, so the
-   cream reads as paper rather than as flat #EFEBDF */
+/* The old "Harvest" paper grain, kept switchable but off: the expressive design is
+   flat tonal surfaces. */
 body::before {
   content: "";
   position: fixed;
@@ -121,12 +124,11 @@ body > * { position: relative; z-index: 1; }
 
 h1, h2, h3, h4 {
   font-family: var(--display);
-  font-weight: 600;
+  font-weight: 760;
   color: var(--ink);
-  line-height: 1.08;
-  letter-spacing: -.015em;
+  line-height: 1.06;
+  letter-spacing: -.02em;
   margin: 0;
-  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 0;
   text-wrap: balance;
 }
 h1 { font-size: clamp(2.05rem, 1.35rem + 3.6vw, 4.05rem); letter-spacing: -.028em; }
@@ -407,7 +409,7 @@ img, svg { display: block; max-width: 100%; }
   font-weight: 600;
   line-height: 1.05;
   color: var(--panel-ink);
-  font-variation-settings: "opsz" 40;
+
 }
 .slab dd small {
   display: block;
@@ -627,7 +629,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--ink);
   line-height: 1;
   margin-top: .9rem;
-  font-variation-settings: "opsz" 60;
+
 }
 .tier__price span {
   font-family: var(--body);
@@ -680,7 +682,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--ink);
   letter-spacing: -.01em;
   list-style: none;
-  font-variation-settings: "opsz" 40;
+
 }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
@@ -763,7 +765,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: 1rem;
   font-style: italic;
   color: var(--ink);
-  font-variation-settings: "opsz" 24, "SOFT" 40, "WONK" 1;
+
 }
 
 /* ==========================================================================
